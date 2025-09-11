@@ -3,7 +3,7 @@
 static const int PWM_PIN = 1;
 static const int PWM_CHANNEL = 0;
 static const int PWM_FREQ = 20000;
-static const int PWM_RESOLUTION = 11;
+static const int PWM_RESOLUTION = 10;
 static const int MAX_PWM_VALUE = (1 << PWM_RESOLUTION) - 1;
 
 void setup() {
@@ -20,11 +20,15 @@ void loop() {
   for (int i = 0; i <= MAX_PWM_VALUE; i += 8) {
     int inv_pwm = MAX_PWM_VALUE - i; // invert PWM value for TC4426A
     ledcWrite(PWM_CHANNEL, inv_pwm);
-    delay(2);
+    Serial.print("PWM: ");
+    Serial.println(inv_pwm);
+    delay(5);
   }
   for (int i = MAX_PWM_VALUE; i >= 0; i -= 8) {
     int inv_pwm = MAX_PWM_VALUE - i; // invert PWM value for TC4426A
     ledcWrite(PWM_CHANNEL, inv_pwm);
-    delay(2);
+    Serial.print("PWM: ");
+    Serial.println(inv_pwm);
+    delay(5);
   }
 }
